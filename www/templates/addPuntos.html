@@ -1,0 +1,22 @@
+<ion-view view-title="Añadir puntuacion">
+  <ion-content>
+    <form name="puntuacionForm" ng-submit="addPuntuacion()">
+      <div class="list">
+        <label class="item item-input item-select">
+          <div class="input-label">Jornada</div>
+          <select required name="jornada" ng-model="puntuacion.jornada">
+            <option ng-repeat="n in jornadas track by $index">{{n}}</option>
+          </select>
+          <div class="form-error" ng-show="puntuacionForm.jornada.$error.required">Campo obligatorio</div>
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Puntos: </span>
+          <input type="number" required max="200" name="puntos" ng-model="puntuacion.puntos" >       
+        </label>
+      </div>
+      <label class="item">
+          <button class="button button-block button-positive" type="submit" ng-disabled="!puntuacionForm.$valid" >Añadir Puntuacion</button>
+        </label>
+    </form>
+  </ion-content>
+</ion-view>

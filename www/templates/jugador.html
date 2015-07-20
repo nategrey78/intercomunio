@@ -1,0 +1,20 @@
+<ion-view view-title="Playlist">
+  <ion-content>
+    <h1>{{player.nombre}}</h1>
+    <div class="list list-inset">
+      <div class="item">Puntos totales
+        <span class="badge badge-assertive">{{calculaPuntos(player)}}</span>
+      </div>
+    </div>
+    
+    <div class="list card">
+      <a href="#" class="item item-icon-left" ng-repeat="puntuacion in player.puntuacion">
+        Jornada: {{puntuacion.jornada}} 
+        <span class="badge {{getClassPuntuacion(puntuacion.puntos)}}">{{puntuacion.puntos}}</span>
+      </a>
+    </div>
+    <label class="item">
+          <button class="button button-block button-positive" on-tap="addPuntuacion()" >Añadir Puntuacion</button>
+        </label>
+  </ion-content>
+</ion-view>

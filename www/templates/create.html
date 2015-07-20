@@ -1,0 +1,21 @@
+<ion-view view-title="Nuevo usuario">
+  <ion-content>
+     <form name="jugadorForm" ng-submit="addPlayer()">
+      <div class="list">
+        <label class="item item-input item-floating-label">
+        <span class="input-label">Nombre</span>
+        <input type="text" placeholder="Nombre" name="nombre" 
+            ng-model="jugador.nombre"
+            ng-minlength="5" ng-maxlength="10" 
+            required>
+            <div class="form-error" ng-show="jugadorForm.nombre.$dirty && jugadorForm.nombre.$error.maxlength" >El Nombre no puede tener mas de 10 caracteres</div>  
+            <div class="form-error" ng-show="jugadorForm.nombre.$dirty && jugadorForm.nombre.$error.minlength" >El Nombre no puede tener menos de 5 caracteres</div>  
+            <div class="form-error" ng-show="jugadorForm.nombre.$dirty && jugadorForm.nombre.$error.required">Campo obligatorio</div>
+      </label>
+        <label class="item">
+          <button class="button button-block button-positive" type="submit" ng-disabled="!jugadorForm.$valid">Añadir</button>
+        </label>
+      </div>
+    </form>
+  </ion-content>
+</ion-view>
