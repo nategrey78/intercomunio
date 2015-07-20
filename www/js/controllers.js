@@ -53,8 +53,10 @@ angular.module('starter.controllers', [])
     
   //$scope.player=jugador;
   $scope.player = servicePlayer.getPlayer($stateParams.jugadorId);
-  $scope.calculaPuntos = function (jugador) {
-    return servicePlayer.getPuntosTotales(jugador);
+  console.log("id del jugador: " + $stateParams.jugadorId);
+  console.log($scope.player);
+  $scope.getPuntos = function () {
+    return servicePlayer.getPuntosTotales($scope.player);
   };
   $scope.getClassPuntuacion = function (puntos) {
     if (puntos < 20) {
@@ -69,13 +71,13 @@ angular.module('starter.controllers', [])
   };
 
   $scope.addPuntuacion = function () {
-    $state.go("app.puntuacion", { jugadorId: $scope.player.id });
+    $state.go("app.puntuacion", { jugadorId: $scope.player.$id });
   }
 
 }).controller('addPuntosCtrl', function ($scope, $stateParams, servicePlayer, $state) {
 
   $scope.player = servicePlayer.getPlayer($stateParams.jugadorId);
-   console.log($stateParams.jugadorId);
+   console.log("id del jugador22: " + $stateParams.jugadorId);
   console.log($scope.player);
   $scope.jornadas = [];
   $scope.puntuacion = {};

@@ -1,6 +1,9 @@
-angular.module('starter.services', [])
+angular.module('starter.services', ['firebase'])
 
-	.factory('servicePlayer', function () {
+	.factory('servicePlayer', function ($firebaseArray) {
+	
+	var  ref = new Firebase("https://blinding-inferno-6858.firebaseio.com/");
+	ref.orderByChild("id");
 	var mockData = [
 		{
 			nombre: 'Reggae',
@@ -81,6 +84,10 @@ angular.module('starter.services', [])
 			]
 		}
 	];
+	
+	
+	var _data = ref.child("players");
+	var listaDatos= $firebaseArray(new Firebase("https://blinding-inferno-6858.firebaseio.com/players"));
 	var idMax = 7;
 
 	return {
@@ -95,21 +102,23 @@ angular.module('starter.services', [])
 			return -1;
 		},
 		getListaJugadores: function name() {
-			return mockData;
+			console.log(listaDatos);
+			return listaDatos;
 		},
 		addPlayer: function (nombreJugador) {
-			var aux = {
-				nombre: nombreJugador,
-				id: idMax,
-				puntuacion: []
+			var aux = {				
+					nombre: nombreJugador,				
+					puntuacion: []				
 			};
 			idMax = idMax + 1;
-			mockData.push(aux);
+			_data.child(idMax).set(aux);			
 		},
-		getPlayer: function (idJugador) {
-			for (var i = 0; i < mockData.length; i++) {
-				if (idJugador == mockData[i].id) {
-					return mockData[i];
+		getPlayer: function (idJugador) {				
+			for (var i = 0; i < listaDatos.length; i++) {
+				console.log(listaDatos[i].$id);	
+				console.log(idJugador);
+				if (idJugador == listaDatos[i].$id) {					
+					return listaDatos[i];
 				}
 			}
 		},
@@ -127,9 +136,11 @@ angular.module('starter.services', [])
 			if ((!jugador.puntuacion) || (jugador.puntuacion.length == 0)) {
 				jugador.puntuacion = [];
 			}
-			jornada.id = idMax;
-			idMax = idMax + 1;
+			console.log(jornada);
+			
 			jugador.puntuacion.push(jornada);
+			console.log(jugador);
+			_data.child(jugador.$id).update(jugador.puntuacion);
 		}
 	};
 });

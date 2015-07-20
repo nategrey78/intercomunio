@@ -1,7 +1,7 @@
 <ion-view view-title="General">
   <ion-content>
     <ion-list>
-      <ion-item ng-repeat="jugador in jugadores" href="#/app/jugador/{{jugador.id}}">
+      <ion-item ng-repeat="jugador in jugadores" href="#/app/jugador/{{jugador.$id}}">
         {{jugador.nombre}} - {{calculaPuntos(jugador)}}
       </ion-item>
     </ion-list>
